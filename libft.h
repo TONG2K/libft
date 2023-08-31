@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:07:52 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/08/30 23:45:21 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/08/31 12:28:33 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,5 +47,6 @@ int		ft_isalnum(int c);
 int		ft_atoi(const char *str);
 /* !!!!!!!!!!!!!!!!!! BONUS !!!!!!!!!!!!!!!!!! */
 char	*ft_strjoin(char const *s1, char const *s2);
+char	*ft_substr(char const *s, unsigned int start, size_t len);
 
 #endif
