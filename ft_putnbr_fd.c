@@ -1,32 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 20:48:52 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/02 18:53:21 by jikarunw         ###   ########.fr       */
+/*   Created: 2023/09/03 15:40:01 by jikarunw          #+#    #+#             */
+/*   Updated: 2023/09/03 15:42:24 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	*ft_memcpy(void *dst, const void *src, size_t n)
+void	ft_putnbr_fd(int n, int fd)
 {
-	size_t		i;
-	char		*dst_char;
-	const char	*src_char;
+	int	rev;
+	int	digit;
 
-	if (!dst)
-		return (NULL);
-	i = 0;
-	dst_char = (char *)dst;
-	src_char = (const char *)src;
-	while (i < n)
+	if (n == 0)
 	{
-		dst_char[i] = src_char[i];
-		i++;
+		ft_putchar_fd('0', fd);
+		return ;
 	}
-	return (dst);
+	if (n < 0)
+	{
+		ft_putchar_fd('-', fd);
+		n = -n;
+	}
+	rev = 0;
+	while (n > 0)
+	{
+		digit = n % 10;
+		rev = rev * 10 + digit;
+		n /= 10;
+	}
+	while (rev > 0)
+	{
+		digit = rev % 10 + '0';
+		ft_putchar_fd(digit, fd);
+		rev /= 10;
+	}
 }
