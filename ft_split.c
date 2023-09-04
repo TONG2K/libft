@@ -6,60 +6,85 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/04 02:15:22 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:12:17 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static char *ft_strndup(const char *str, size_t n)
+static int	ft_count_word(char const *s, char c)
 {
-	char *dup = (char *)malloc((n + 1) * sizeof(char));
-	if (!dup)
-		return (NULL);
-	for (size_t i = 0; i < n; i++)
-		dup[i] = str[i];
-	dup[n] = '\0';
-	return (dup);
+	int	i;
+	int	word;
+
+	i = 0;
+	word = 0;
+	while (s[i])
+	{
+		if (s[i] != c)
+		{
+			word++;
+			while (s[i] != c && s[i])
+				i++;
+		}
+		else
+			i++;
+	}
+	return (word);
+}
+
+static int	ft_size_word(char const *s, char c, int i)
+{
+	int	size;
+
+	size = 0;
+	while (s[i] != c)
+	{
+		size++;
+		i++;
+	}
+	return (size);
+}
+
+static void	ft_free(char **strs, int j)
+{
+	while (j-- > 0)
+		free(strs[j]);
+	free(strs);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	size_t num_words = 0, i = 0, start = 0;
-	if (!s)
+	int		i;
+	int		j;
+	int		word;
+	int		size;
+	char	**strs;
+
+	i = 0;
+	j = -1;
+	word = ft_count_word(s, c);
+	strs = (char **)malloc((word + 1) * sizeof(char *));
+	if (!(strs))
 		return (NULL);
-    while (s[i])
-    {
+	while (++j < word)
+	{
 		while (s[i] == c)
 			i++;
-		if (s[i] && ++num_words)
-			while (s[i] && s[i] != c)
-				i++;
-	}
-    char **result = (char **)malloc((num_words + 1) * sizeof(char *));
-	if (!result)
-		return (NULL);
-	i = 0;
-	while (*s)
-	{
-		while (*s == c)
-			s++;
-		if (*s)
+		size = ft_size_word(s, c, i);
+		strs = ft_substr(s, i, j);
+		if (!strs[j])
 		{
-			size_t end = start;
-			while (s[end] && s[end] != c)
-				end++;
-			result[i] = ft_strndup(s + start, end - start);
-			if (!result[i++])
-			{
-				while (i > 0)
-					free(result[--i]);
-				free(result);
-				return (NULL);
-			}
-			start = end;
+			ft_free(strs, j);
+			return (NULL);
 		}
+		i += size;
 	}
-	result[num_words] = (NULL);
-	return result;
+	strs[j] = 0;
+	return (strs);
+}
+
+int	main(void)
+{
+	
 }

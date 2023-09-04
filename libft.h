@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 12:07:52 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/04 01:25:16 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:12:25 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,5 +58,6 @@ void	ft_putendl_fd(char *s, int fd);
 void	ft_putnbr_fd(int n, int fd);
 char	**ft_split(char const *s, char c);
 char	*ft_itoa(int n);
+/* ---------------------!! ** Part BONUS ** !!--------------------- */
 
 #endif
