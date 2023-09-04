@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/04 01:34:57 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/04 02:15:22 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char	**ft_split(char const *s, char c)
 	}
     char **result = (char **)malloc((num_words + 1) * sizeof(char *));
 	if (!result)
-		return NULL;
+		return (NULL);
 	i = 0;
 	while (*s)
 	{
@@ -55,11 +55,11 @@ char	**ft_split(char const *s, char c)
 				while (i > 0)
 					free(result[--i]);
 				free(result);
-				return NULL;
+				return (NULL);
 			}
 			start = end;
 		}
 	}
-	result[num_words] = NULL;
+	result[num_words] = (NULL);
 	return result;
 }
