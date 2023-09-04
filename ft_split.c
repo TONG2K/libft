@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/05 01:12:17 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/05 01:14:07 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,3 @@ char	**ft_split(char const *s, char c)
 	return (strs);
 }
 
-int	main(void)
-{
-	
-}
