@@ -1,6 +1,6 @@
 # libft
 
-![42 Logo](https://www.42.fr/wp-content/themes/42/images/42_logo.svg)
+![42 Logo]([https://www.42.fr/wp-content/themes/42/images/42_logo.svg](https://42.fr/wp-content/uploads/2021/08/42.jpg))
 
 Welcome to `libft`, a custom C library created for use at 42 school. This library is the result of extensive effort and is designed to help you develop your programming skills. It provides a collection of standard C functions and additional utility functions that you can use in your projects.
 
