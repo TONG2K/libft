@@ -35,10 +35,13 @@ To get started with `libft`, follow these steps:
 ```sh
 git clone https://github.com/Tisarji/libft.git
 
----
+```
 
 ## Author
 
-[Tisarji]
+[Tisarji 42 intra : jikarunw]
 Feel free to explore, use, and contribute to this library. It's a valuable resource for 42 School students and anyone interested in C programming.
 
+## License
+
+This project is open-source and available under the MIT License. You are encouraged to use and modify it according to your needs.
