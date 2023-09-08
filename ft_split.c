@@ -6,81 +6,77 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/05 01:14:07 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/05 22:15:29 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_word(char const *s, char c)
+static int	ft_count_div(char const *s, char c)
 {
 	int	i;
-	int	word;
+	int	count;
 
+	count = 0;
+	if (s[0] && s[0] != c)
+		count++;
 	i = 0;
-	word = 0;
-	while (s[i])
+	while (i < (int)ft_strlen(s))
 	{
-		if (s[i] != c)
-		{
-			word++;
-			while (s[i] != c && s[i])
-				i++;
-		}
-		else
-			i++;
-	}
-	return (word);
-}
-
-static int	ft_size_word(char const *s, char c, int i)
-{
-	int	size;
-
-	size = 0;
-	while (s[i] != c)
-	{
-		size++;
+		if (s[i] == c && s[i + 1] != c && s[i + 1])
+			count++;
 		i++;
 	}
-	return (size);
+	return (count);
 }
 
-static void	ft_free(char **strs, int j)
+static char	*ft_extract_segment(char const *s, char c, int i)
 {
-	while (j-- > 0)
-		free(strs[j]);
-	free(strs);
+	int		j;
+	int		k;
+	char	*result;
+
+	j = i;
+	while (s[i] && s[i] != c)
+		i++;
+	result = (char *)malloc(sizeof(char) * ((i - j) + 1));
+	if (!result)
+		return (NULL);
+	k = 0;
+	while (j != i)
+	{
+		result[k] = s[j];
+		k++;
+		j++;
+	}
+	result[k] = '\0';
+	return (result);
 }
 
 char	**ft_split(char const *s, char c)
 {
+	char	**str;
 	int		i;
 	int		j;
-	int		word;
-	int		size;
-	char	**strs;
 
-	i = 0;
-	j = -1;
-	word = ft_count_word(s, c);
-	strs = (char **)malloc((word + 1) * sizeof(char *));
-	if (!(strs))
+	if (!s)
 		return (NULL);
-	while (++j < word)
+	str = (char **)malloc(sizeof(char *) * (ft_count_div(s, c) + 1));
+	if (!str)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (i <= (int)ft_strlen(s) && ft_count_div(s, c))
 	{
-		while (s[i] == c)
-			i++;
-		size = ft_size_word(s, c, i);
-		strs = ft_substr(s, i, j);
-		if (!strs[j])
+		if (ft_strlen(ft_extract_segment(s, c, i)))
 		{
-			ft_free(strs, j);
-			return (NULL);
+			str[j] = ft_extract_segment(s, c, i);
+			i += (ft_strlen(str[j]) + 1);
+			j++;
 		}
-		i += size;
+		else
+			i++;
 	}
-	strs[j] = 0;
-	return (strs);
+	str[j] = NULL;
+	return (str);
 }
-
