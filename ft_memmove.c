@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 23:06:13 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/08/29 23:11:09 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/09 01:30:33 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,3 +37,16 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 	}
 	return (dst);
 }
+
+// int	main(void)
+// {
+// 	char	src[] = "I got it!";
+// 	char	dst[20];
+
+// 	size_t len = ft_strlen(src);
+
+// 	ft_memmove(dst, src, len);
+// 	printf("Src = %s \n", src);
+// 	printf("Dst = %s", dst);
+// 	return (0);
+// }

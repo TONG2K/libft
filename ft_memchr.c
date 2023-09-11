@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 09:54:01 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/08/30 12:17:48 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/08 20:42:18 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void	*ft_memchr(const void *s, int c, size_t n)
 {
-	unsigned int	i;
 	unsigned char	*sourc_char;
+	unsigned int	i;
 
 	sourc_char = (unsigned char *)s;
 	i = 0;

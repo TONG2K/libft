@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/23 13:15:32 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/05 21:51:07 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/09 01:40:41 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 char	*ft_strchr(const char *str, int c)
 {
-	char	*ptr;
+	unsigned int	i;
 
-	ptr = (char *)str;
-	while (*ptr)
+	i = 0;
+	while (str[i])
 	{
-		if (*ptr == (unsigned char)c)
-			return (ptr);
-		ptr++;
+		if (str[i] == (char)c)
+			return ((char *)&str[i]);
+		i++;
 	}
-	if (c == 0)
-		return (ptr);
+	if ((char)c == str[i])
+		return ((char *)&str[i]);
 	return (NULL);
 }

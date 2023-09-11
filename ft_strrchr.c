@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:22:07 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/08/30 14:27:40 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/11 02:33:34 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,16 @@
 
 char	*ft_strrchr(const char *s, int c)
 {
-	unsigned int	i;
-	char			*l_o;
+	char	*ptr;
 
-	l_o = NULL;
-	i = 0;
-	while (s[i])
+	ptr = NULL;
+	if (!c)
+		return ((char *)s + ft_strlen(s));
+	while (*s)
 	{
-		if (s[i] == (char)c)
-			l_o = (char *)&s[i];
-		i++;
+		if (*s == c)
+			ptr = ((char *)s);
+		s++;
 	}
-	if ((char) c == s[i])
-		return ((char *)&s[i]);
-	return (l_o);
+	return (ptr);
 }

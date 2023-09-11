@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 20:15:14 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/08/30 20:47:57 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/10 01:44:55 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,27 @@
 char	*ft_strnstr(const char *haystack, const char *needle, size_t len)
 {
 	size_t	i;
-	size_t	j;
+	char	*hay_ptr;
+	char	*need_ptr;
 
-	i = 0;
-	if (!haystack || !needle || !needle[0])
-		return ((char *)(haystack));
-	while (haystack[i] && i < len) 
+	if (!*needle)
+		return ((char *)haystack);
+	while (len-- && *haystack)
 	{
-		j = 0;
-		while (haystack[i + j] && needle[j] && i + j < len 
-			&& haystack[i + j] == needle[j])
-			j++;
-		if (!needle[j])
-			return ((char *)(haystack + i));
-		i++;
+		if (*haystack == *needle)
+		{
+			i = len;
+			hay_ptr = (char *)haystack + 1;
+			need_ptr = (char *)needle + 1;
+			while (i-- && *hay_ptr && *need_ptr && *hay_ptr == *need_ptr)
+			{
+				++hay_ptr;
+				++need_ptr;
+			}
+			if (*need_ptr == '\0')
+				return ((char *)haystack);
+		}
+		++haystack;
 	}
 	return (NULL);
 }

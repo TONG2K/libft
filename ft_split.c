@@ -6,77 +6,88 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/05 22:15:29 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/10 23:03:54 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-static int	ft_count_div(char const *s, char c)
+static int	ft_free(char **str, int size)
 {
-	int	i;
-	int	count;
-
-	count = 0;
-	if (s[0] && s[0] != c)
-		count++;
-	i = 0;
-	while (i < (int)ft_strlen(s))
-	{
-		if (s[i] == c && s[i + 1] != c && s[i + 1])
-			count++;
-		i++;
-	}
-	return (count);
+	while (size--)
+		free(str[size]);
+	return (-1);
 }
 
-static char	*ft_extract_segment(char const *s, char c, int i)
+static int	ft_count_words(char const *str, char c)
 {
-	int		j;
-	int		k;
-	char	*result;
+	int	i;
+	int	words;
 
-	j = i;
-	while (s[i] && s[i] != c)
-		i++;
-	result = (char *)malloc(sizeof(char) * ((i - j) + 1));
-	if (!result)
-		return (NULL);
-	k = 0;
-	while (j != i)
+	words = 0;
+	i = 0;
+	while (str[i] != '\0')
 	{
-		result[k] = s[j];
-		k++;
-		j++;
+		if ((str[i + 1] == c || str[i + 1] == '\0') == 1 && 
+			(str[i] == c || str[i] == '\0') == 0)
+			words++;
+		i++;
 	}
-	result[k] = '\0';
-	return (result);
+	return (words);
+}
+
+static void	ft_make_word(char *dst, const char *str, char c)
+{
+	int		i;
+
+	i = 0;
+	while ((str[i] == c || str[i] == '\0') == 0)
+	{
+		dst[i] = str[i];
+		i++;
+	}
+	dst[i] = '\0';
+}
+
+static int	ft_make_split(char **split, const char *str, char c)
+{
+	int	i;
+	int	j;
+	int	word;
+
+	word = 0;
+	i = 0;
+	while (str[i] != '\0')
+	{
+		if ((str[i] == c || str[i] == '\0') == 1)
+			i++;
+		else
+		{
+			j = 0;
+			while ((str[i + j] == c || str[i + j] == '\0') == 0)
+				j++;
+			split[word] = (char *)malloc(sizeof(char) * (j + 1));
+			if (split[word] == NULL)
+				return (ft_free(split, word - 1));
+			ft_make_word(split[word], str + i, c);
+			i += j;
+			word++;
+		}
+	}
+	return (0);
 }
 
 char	**ft_split(char const *s, char c)
 {
-	char	**str;
-	int		i;
-	int		j;
+	char	**res;
+	int		words;
 
-	if (!s)
+	words = ft_count_words(s, c);
+	res = (char **)malloc(sizeof(char *) * (words + 1));
+	if (res == NULL)
 		return (NULL);
-	str = (char **)malloc(sizeof(char *) * (ft_count_div(s, c) + 1));
-	if (!str)
+	res[words] = 0;
+	if (ft_make_split(res, s, c) == -1)
 		return (NULL);
-	i = 0;
-	j = 0;
-	while (i <= (int)ft_strlen(s) && ft_count_div(s, c))
-	{
-		if (ft_strlen(ft_extract_segment(s, c, i)))
-		{
-			str[j] = ft_extract_segment(s, c, i);
-			i += (ft_strlen(str[j]) + 1);
-			j++;
-		}
-		else
-			i++;
-	}
-	str[j] = NULL;
-	return (str);
+	return (res);
 }
