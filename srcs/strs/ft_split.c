@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 01:24:08 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/11 14:38:11 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/13 13:58:36 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 static int	ft_free(char **str, int size)
 {
-	while (size--)
-		free(str[size]);
+	while (size >= 0)
+		free(str[size--]);
+	free(str);
 	return (-1);
 }
 

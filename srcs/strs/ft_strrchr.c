@@ -1,39 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcat.c                                       :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/23 23:19:21 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/11 14:46:08 by jikarunw         ###   ########.fr       */
+/*   Created: 2023/08/30 14:22:07 by jikarunw          #+#    #+#             */
+/*   Updated: 2023/09/11 16:10:05 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_strlcat(char *dest, const char *src, size_t size)
+char	*ft_strrchr(const char *s, int c)
 {
-	size_t	i;
-	size_t	j;
-	size_t	dest_length;
-	size_t	src_lenght;
+	unsigned int	i;
+	char			*l_o;
 
-	dest_length = ft_strlen(dest);
-	src_lenght = ft_strlen(src);
-	j = dest_length;
+	l_o = NULL;
 	i = 0;
-	if (dest_length < size - 1 && size > 0)
+	while (s[i])
 	{
-		while (src[i] && dest_length + i < size - 1)
-		{
-			dest[j] = src[i];
-			j++;
-			i++;
-		}
-		dest[j] = 0;
+		if (s[i] == (char)c)
+			l_o = (char *)&s[i];
+		i++;
 	}
-	if (dest_length >= size)
-		dest_length = size;
-	return (dest_length + src_lenght);
+	if ((char) c == s[i])
+		return ((char *)&s[i]);
+	return (l_o);
 }

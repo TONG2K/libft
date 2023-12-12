@@ -6,45 +6,108 @@
 #    By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/08/28 19:53:10 by jikarunw          #+#    #+#              #
-#    Updated: 2023/09/11 14:17:57 by jikarunw         ###   ########.fr        #
+#    Updated: 2023/12/13 02:55:50 by jikarunw         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME			= libft.a
+# Colors
+COLOR_RESET = \033[0m
+COLOR_YELLOW = \033[1;33m
+COLOR_CYAN = \033[1;36m
+COLOR_RED = \033[91m
+COLOR_GREEN = \033[92m
+COLOR_PINK = \033[95m
 
-SRCS =				ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
-					ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c \
-					ft_strlcpy.c ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c \
-					ft_strrchr.c ft_strncmp.c ft_memchr.c ft_memcmp.c ft_strnstr.c \
-					ft_atoi.c ft_calloc.c ft_strdup.c \
-					ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c \
-					ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+NAME = libft.a
 
+LOCAL_SRC_PATH = srcs
+LOCAL_HEADER_PATH = includes
+OBJ_DIR = obj
 
-SRCS_BONUS		=	ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c \
-					ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c
+IO_SRC =	io/ft_putchar_fd.c \
+			io/ft_putendl_fd.c \
+			io/ft_putnbr_fd.c \
+			io/ft_putstr_fd.c
 
-OBJS			= 	$(SRCS:.c=.o)
-OBJS_BONUS		=	$(SRCS_BONUS:.c=.o)
+LSTS_SRC =	lsts/ft_lstadd_back.c \
+			lsts/ft_lstadd_front.c \
+			lsts/ft_lstclear.c \
+			lsts/ft_lstdelone.c \
+			lsts/ft_lstiter.c \
+			lsts/ft_lstlast.c \
+			lsts/ft_lstmap.c \
+			lsts/ft_lstnew.c \
+			lsts/ft_lstsize.c
 
-CC				= cc
-RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
+MEMS_SRC =	mems/ft_memchr.c \
+ 			mems/ft_memcmp.c \
+ 			mems/ft_memcpy.c \
+ 			mems/ft_memmove.c \
+ 			mems/ft_memset.c \
+ 			mems/ft_bzero.c \
+ 			mems/ft_calloc.c
 
-all:			$(NAME)
+STRS_SRC =	strs/ft_atoi.c \
+			strs/ft_itoa.c \
+			strs/ft_split.c \
+			strs/ft_strchr.c \
+			strs/ft_strdup.c \
+			strs/ft_striteri.c \
+			strs/ft_strjoin.c \
+			strs/ft_strlcat.c \
+			strs/ft_strlcpy.c \
+			strs/ft_strlen.c \
+			strs/ft_strmapi.c \
+			strs/ft_strncmp.c \
+			strs/ft_strnstr.c \
+			strs/ft_strrchr.c \
+			strs/ft_strtrim.c \
+			strs/ft_substr.c \
+			strs/ft_isalnum.c \
+			strs/ft_isalpha.c \
+			strs/ft_isascii.c \
+			strs/ft_isdigit.c \
+			strs/ft_isprint.c \
+			strs/ft_tolower.c \
+			strs/ft_toupper.c
 
-$(NAME):		$(OBJS)
-				ar rcs $(NAME) $(OBJS)
+# Objects
+IO_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${IO_SRC}}
+LSTS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${LSTS_SRC}}
+MEMS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${MEMS_SRC}}
+STRS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${STRS_SRC}}
+
+IO_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(IO_SRCS))
+LSTS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(LSTS_SRCS))
+MEMS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(MEMS_SRCS))
+STRS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(STRS_SRCS))
+
+# Compiler
+CC = 		gcc
+CFLAGS =	-Wall \
+			-Wextra \
+			-Werror \
+			-I $(LOCAL_HEADER_PATH)
+# Targets
+all: $(NAME)
+
+$(NAME): $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS)
+	@ar rcs $(NAME) $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS)
+	@echo "[$(COLOR_YELLOW)$(NAME) --> OK$(COLOR_RESET)]\n ${COLOR_GREEN}Success!${COLOR_RESET}"
+	@echo "$(COLOR_PINK)\tUsage: libft.a$(COLOR_RESET)"
+
+${OBJ_DIR}/%.o: ${LOCAL_SRC_PATH}/%.c
+	@mkdir -p $(dir $@)
+	@$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-				$(RM) $(OBJS)
+	@echo "$(COLOR_RED)Cleaning object files...$(COLOR_RESET)"
+	@rm -rf $(OBJ_DIR)
 
-fclean:			clean
-				$(RM) $(NAME)
+fclean: clean
+	@echo "$(COLOR_RED)Cleaning $(NAME)...$(COLOR_RESET)"
+	@rm -f $(NAME)
 
-re:				fclean $(NAME)
+re: fclean all
 
-bonus:			$(OBJS) $(OBJS_BONUS)
-				ar rcs $(NAME) $(OBJS) $(OBJS_BONUS)
-
-.PHONY:			all clean fclean re bonus
+.PHONY: all clean fclean re

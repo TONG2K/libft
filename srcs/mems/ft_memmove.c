@@ -1,33 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstmap.c                                        :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/05 23:37:58 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/06 00:37:07 by jikarunw         ###   ########.fr       */
+/*   Created: 2023/08/29 23:06:13 by jikarunw          #+#    #+#             */
+/*   Updated: 2023/09/11 16:10:24 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
+void	*ft_memmove(void *dst, const void *src, size_t len)
 {
-	t_list	*head;
-	t_list	*temp;
+	unsigned int	i;
 
-	head = NULL;
-	while (lst)
+	if (!dst && !src)
+		return (NULL);
+	if (dst > src)
 	{
-		temp = ft_lstnew((*f)(lst -> content));
-		if (!temp)
+		while (len > 0)
 		{
-			ft_lstclear(&head, del);
-			return (NULL);
+			((char *)dst)[len - 1] = ((char *)src)[len - 1];
+			len--;
 		}
-		ft_lstadd_back(&head, temp);
-		lst = lst -> next;
 	}
-	return (head);
+	else
+	{
+		i = 0;
+		while (i < len)
+		{
+			((char *)dst)[i] = ((char *)src)[i];
+			i++;
+		}
+	}
+	return (dst);
 }

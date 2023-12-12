@@ -6,7 +6,7 @@
 /*   By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 19:31:24 by jikarunw          #+#    #+#             */
-/*   Updated: 2023/09/11 19:13:35 by jikarunw         ###   ########.fr       */
+/*   Updated: 2023/09/14 12:16:52 by jikarunw         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,13 @@ void	*ft_calloc(size_t count, size_t size)
 {
 	char	*ptr;
 
-	// -1 > -1 / 42
-	// 42 > -1 / -1 = 1
 	if (count != 0 && size > INT_MAX / count)
 		return (NULL);
-	// if (count && size > INT_MIN / count)
-	// 	return (NULL);
 	ptr = malloc(count * size);
 	if (ptr == NULL)
 		return (NULL);
 	ft_memset(ptr, 0, count * size);
 	return (ptr);
-	// return (calloc(count, size));
 }
 
 // int	main(void)
