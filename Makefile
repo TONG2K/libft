@@ -1,15 +1,3 @@
-# **************************************************************************** #
-#                                                                              #
-#                                                         :::      ::::::::    #
-#    Makefile                                           :+:      :+:    :+:    #
-#                                                     +:+ +:+         +:+      #
-#    By: jikarunw <jikarunw@student.42.fr>          +#+  +:+       +#+         #
-#                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/08/28 19:53:10 by jikarunw          #+#    #+#              #
-#    Updated: 2023/12/13 02:55:50 by jikarunw         ###   ########.fr        #
-#                                                                              #
-# **************************************************************************** #
-
 # Colors
 COLOR_RESET = \033[0m
 COLOR_YELLOW = \033[1;33m
@@ -22,65 +10,80 @@ NAME = libft.a
 
 LOCAL_SRC_PATH = srcs
 LOCAL_HEADER_PATH = includes
-OBJ_DIR = obj
+OBJ_DIR = objs
 
-IO_SRC =	io/ft_putchar_fd.c \
-			io/ft_putendl_fd.c \
-			io/ft_putnbr_fd.c \
-			io/ft_putstr_fd.c
+IO_SRC =		io/ft_putchar_fd.c \
+				io/ft_putendl_fd.c \
+				io/ft_putnbr_fd.c \
+				io/ft_putstr_fd.c
 
-LSTS_SRC =	lsts/ft_lstadd_back.c \
-			lsts/ft_lstadd_front.c \
-			lsts/ft_lstclear.c \
-			lsts/ft_lstdelone.c \
-			lsts/ft_lstiter.c \
-			lsts/ft_lstlast.c \
-			lsts/ft_lstmap.c \
-			lsts/ft_lstnew.c \
-			lsts/ft_lstsize.c
+LSTS_SRC =		lsts/ft_lstadd_back.c \
+				lsts/ft_lstadd_front.c \
+				lsts/ft_lstclear.c \
+				lsts/ft_lstdelone.c \
+				lsts/ft_lstiter.c \
+				lsts/ft_lstlast.c \
+				lsts/ft_lstmap.c \
+				lsts/ft_lstnew.c \
+				lsts/ft_lstsize.c
 
-MEMS_SRC =	mems/ft_memchr.c \
- 			mems/ft_memcmp.c \
- 			mems/ft_memcpy.c \
- 			mems/ft_memmove.c \
- 			mems/ft_memset.c \
- 			mems/ft_bzero.c \
- 			mems/ft_calloc.c
+MEMS_SRC =		mems/ft_memchr.c \
+ 				mems/ft_memcmp.c \
+ 				mems/ft_memcpy.c \
+ 				mems/ft_memmove.c \
+ 				mems/ft_memset.c \
+ 				mems/ft_bzero.c \
+ 				mems/ft_calloc.c
 
-STRS_SRC =	strs/ft_atoi.c \
-			strs/ft_itoa.c \
-			strs/ft_split.c \
-			strs/ft_strchr.c \
-			strs/ft_strdup.c \
-			strs/ft_striteri.c \
-			strs/ft_strjoin.c \
-			strs/ft_strlcat.c \
-			strs/ft_strlcpy.c \
-			strs/ft_strlen.c \
-			strs/ft_strmapi.c \
-			strs/ft_strncmp.c \
-			strs/ft_strnstr.c \
-			strs/ft_strrchr.c \
-			strs/ft_strtrim.c \
-			strs/ft_substr.c \
-			strs/ft_isalnum.c \
-			strs/ft_isalpha.c \
-			strs/ft_isascii.c \
-			strs/ft_isdigit.c \
-			strs/ft_isprint.c \
-			strs/ft_tolower.c \
-			strs/ft_toupper.c
+STRS_SRC =		strs/ft_atoi.c \
+				strs/ft_itoa.c \
+				strs/ft_split.c \
+				strs/ft_strchr.c \
+				strs/ft_strdup.c \
+				strs/ft_striteri.c \
+				strs/ft_strjoin.c \
+				strs/ft_strlcat.c \
+				strs/ft_strlcpy.c \
+				strs/ft_strlen.c \
+				strs/ft_strmapi.c \
+				strs/ft_strncmp.c \
+				strs/ft_strnstr.c \
+				strs/ft_strrchr.c \
+				strs/ft_strtrim.c \
+				strs/ft_substr.c \
+				strs/ft_isalnum.c \
+				strs/ft_isalpha.c \
+				strs/ft_isascii.c \
+				strs/ft_isdigit.c \
+				strs/ft_isprint.c \
+				strs/ft_tolower.c \
+				strs/ft_toupper.c
+
+GNL_SRC =		ft_gnl/get_next_line.c \
+				ft_gnl/get_next_line_utils.c
+
+FT_PRINTF_SRC = ft_printf/ft_printf_char.c \
+				ft_printf/ft_printf_hex.c \
+				ft_printf/ft_printf_nbr.c \
+				ft_printf/ft_printf_ptr.c \
+				ft_printf/ft_printf_string.c \
+				ft_printf/ft_printf_unit.c \
+				ft_printf/ft_printf.c
 
 # Objects
 IO_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${IO_SRC}}
 LSTS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${LSTS_SRC}}
 MEMS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${MEMS_SRC}}
 STRS_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${STRS_SRC}}
+FT_PRINTF_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${FT_PRINTF_SRC}}
+GNL_SRCS = ${addprefix ${LOCAL_SRC_PATH}/, ${GNL_SRC}}
 
 IO_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(IO_SRCS))
 LSTS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(LSTS_SRCS))
 MEMS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(MEMS_SRCS))
 STRS_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(STRS_SRCS))
+FT_PRINTF_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(FT_PRINTF_SRCS))
+GNL_OBJS = $(patsubst ${LOCAL_SRC_PATH}/%.c, ${OBJ_DIR}/%.o, $(GNL_SRCS))
 
 # Compiler
 CC = 		gcc
@@ -91,8 +94,8 @@ CFLAGS =	-Wall \
 # Targets
 all: $(NAME)
 
-$(NAME): $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS)
-	@ar rcs $(NAME) $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS)
+$(NAME): $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS)
+	@ar rcs $(NAME) $(IO_OBJS) $(LSTS_OBJS) $(MEMS_OBJS) $(STRS_OBJS) $(FT_PRINTF_OBJS) $(GNL_OBJS)
 	@echo "[$(COLOR_YELLOW)$(NAME) --> OK$(COLOR_RESET)]\n ${COLOR_GREEN}Success!${COLOR_RESET}"
 	@echo "$(COLOR_PINK)\tUsage: libft.a$(COLOR_RESET)"
 
